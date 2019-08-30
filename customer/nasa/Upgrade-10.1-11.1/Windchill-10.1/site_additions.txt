@@ -1,0 +1,2 @@
+<Property name="wt.webserver.port" overridable="true" targetFile="codebase/wt.properties"
+             value="80"/>
