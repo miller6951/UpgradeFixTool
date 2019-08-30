@@ -1,0 +1,1 @@
+sqlplus -S "$target_db_schema/$target_db_password@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(Host=$target_db_hostname)(Port=$target_db_port))(CONNECT_DATA=(SID=$target_db_service)))" <<EOF
