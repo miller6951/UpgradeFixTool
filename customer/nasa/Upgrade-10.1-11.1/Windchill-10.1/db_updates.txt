@@ -1,1 +1,2 @@
-select * from repository
+select * from repository;
+select * from wtgroup;
