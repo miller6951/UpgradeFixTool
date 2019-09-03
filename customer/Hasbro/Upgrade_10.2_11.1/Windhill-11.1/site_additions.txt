@@ -1,0 +1,45 @@
+ <Property name="wt.cache.size.AclCache" overridable="true"
+             targetFile="codebase/wt.properties"
+             value="10000"/>
+<Property name="wt.cache.size.IBADefViewManager$IBADefViewCache" overridable="true"
+             targetFile="codebase/wt.properties"
+             value="700"/>
+<Property name="wt.cache.size.PreferenceCache" overridable="true"
+             targetFile="codebase/wt.properties"
+             value="16000"/>
+<Property name="wt.cache.size.PropertyDefinitionCache" overridable="true"
+             targetFile="codebase/wt.properties"
+             value="1150"/>
+<Property name="wt.cache.size.StandardUfidSrvService$RemoteObjectIdCache"
+             overridable="true"
+             targetFile="codebase/wt.properties"
+             value="14000"/>
+<Property name="wt.cache.size.EnumerationDefinitionCache" overridable="true"
+             targetFile="codebase/wt.properties"
+             value="500"/>
+<Property name="wt.cache.size.TypeDefinitionCache2" overridable="true"
+             targetFile="codebase/wt.properties"
+             value="1600"/>
+<Property name="wt.cache.size.WTPrincipalCache" overridable="true"
+             targetFile="codebase/wt.properties"
+             value="500000"/>
+<Property name="wt.pom.paging.snapshotQueryLimit" overridable="true"
+             targetFile="db/db.properties"
+             value="20000"/>
+<Property name="wt.pom.minDbConnections" overridable="true" targetFile="db/db.properties"
+             value="25"/>
+<Property name="wt.pom.maxDbConnections" overridable="true" targetFile="db/db.properties"
+             value="25"/>
+<Property name="wt.method.maxHeap" overridable="true" targetFile="codebase/wt.properties"
+             value="8192"/>
+<Property name="wt.method.minHeap" overridable="true" targetFile="codebase/wt.properties"
+             value="8192"/>
+<Property name="wt.manager.maxHeap" overridable="true"
+             targetFile="codebase/wt.properties"
+             value="4096"/>
+<Property name="wt.manager.minHeap" overridable="true"
+             targetFile="codebase/wt.properties"
+             value="4096"/>
+<Property name="wt.inf.team.sendInvitationEmail" overridable="true"
+             targetFile="codebase/wt.properties"
+             value="false"/>
