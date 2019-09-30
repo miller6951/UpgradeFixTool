@@ -41,7 +41,7 @@ winDu () {
 		# zipping up latest windu log folder
 							cd $windu_log_location
 							zip -r latest_windu.zip $windu_latest_log_folder
-		curl -F file=@$windu_log_location/latest_windu.zip -F channels=CA0DDV691 -F title=WinDu_Log_Host:$serv_host -F token=xoxb-341447570482-OTnOVzPsYBMdrrC3rqz90V9O https://slack.com/api/files.upload		
+		curl -F file=@$windu_log_location/latest_windu.zip -F channels=CA0DDV691 -F title=WinDu_Log_Host:$serv_host -F token=$slack_bot_key https://slack.com/api/files.upload		
 }
 
 
@@ -101,7 +101,7 @@ winRu () {
 		# zipping up latest winru log folder
 												cd $winru_log_location
 												zip -r latest_winru.zip $winru_latest_log_folder
-		curl -F file=@$winru_log_location/latest_winru.zip -F channels=CA0DDV691 -F title=WinRu_Log_Host:$serv_host -F token=xoxb-341447570482-OTnOVzPsYBMdrrC3rqz90V9O https://slack.com/api/files.upload
+		curl -F file=@$winru_log_location/latest_winru.zip -F channels=CA0DDV691 -F title=WinRu_Log_Host:$serv_host -F token=$slack_bot_key https://slack.com/api/files.upload
 }
 
 customFiles () {
@@ -176,6 +176,10 @@ shellCommands () {
 }
 
 
+generateSlackKey () {
+     slack_bot_key="$(echo "eG94Yi0yNjg0OTg2NzgwLTc3OTg5NTAzNzg0Ny1uZjd3TlBBOXlBNHJMekM1amw0ZnpUWloK" | openssl enc -base64 -d)"
+
+}
 #Downloading from repo
 	#echo "STATUS - Downloading Latest customer info"
 	#DownloadCustomerInfo
@@ -185,6 +189,7 @@ echo " --- Pre-Upgrade Fix Manager --"
 echo "Created By: Ron Miller"
 echo "*********************************************"
 echo " "
+generateSlackKey
 echo "ALERT - Please run as root and in windchill shell"
 script_location="$(pwd)"
 #Join for array outs and xmls
