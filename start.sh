@@ -328,7 +328,12 @@ echo "Input - Enter target DB hostname"
 
 		#Check DB CONNECTION
 			echo "STATUS - Checking Database Connection"
-		
+			check_sqlplus="$(sqlplus)"
+			if [[ $check_sqlplus == *"command not found"* ]]; then
+				echo "ERROR: Please install sqlplus or make sure env are set"
+				exit 0
+			fi
+
 			echo "exit" | sqlplus "$target_db_schema/$target_db_password@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(Host=$target_db_hostname)(Port=$target_db_port))(CONNECT_DATA=(SID=$target_db_service)))" | grep Connected > /dev/null
 			if [ $? -eq 0 ] 
 			then
@@ -377,4 +382,7 @@ echo "STATUS - EXECUTING SHELL COMMANDS FROM REPO"
 shellCommands
 fi
 
+echo "##########################################"
+echo "				Successfull					"
+echo "##########################################"
 
