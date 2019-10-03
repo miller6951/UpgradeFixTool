@@ -326,16 +326,16 @@ echo "Input - Enter target DB hostname"
 			export target_db_port=$target_db_port
 
 		#Check DB CONNECTION
-		#	echo "STATUS - Checking Database Connection"
-		#
-		#	echo "exit" | sqlplus "$target_db_schema/$target_db_password@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(Host=$target_db_hostname)(Port=$target_db_port))(CONNECT_DATA=(SID=$target_db_service)))" | grep Connected > /dev/null
-		#	if [ $? -eq 0 ] 
-		#	then
-		#  	echo "STATUS - Connected Successfully to Database"
-		#	else
-		#  	echo "ALERT - Cannot Connect TO Database please check tnsnames and entered db ifo"
-		#  	exit 0
-		#	fi
+			echo "STATUS - Checking Database Connection"
+		
+			echo "exit" | sqlplus "$target_db_schema/$target_db_password@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(Host=$target_db_hostname)(Port=$target_db_port))(CONNECT_DATA=(SID=$target_db_service)))" | grep Connected > /dev/null
+			if [ $? -eq 0 ] 
+			then
+		  	echo "STATUS - Connected Successfully to Database"
+			else
+		  	echo "ALERT - Cannot Connect TO Database please check tnsnames and entered db ifo"
+		  	exit 0
+			fi
 
 fi
 
