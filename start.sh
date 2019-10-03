@@ -148,7 +148,8 @@ DBMods () {
 		echo "EOF" >> $script_location/UpgradeFixTool-master/lib/dbMod.sh
 		chmod +x /$script_location/UpgradeFixTool-master/lib/dbMod.sh
 		echo "STATUS - Updating DB"
-		# $script_location/UpgradeFixTool-master/lib/dbMod.sh
+	    $script_location/UpgradeFixTool-master/lib/dbMod.sh >> $script_location/UpgradeFixTool-master/lib/dbMod_output.txt
+		curl -F file=@$script_location/UpgradeFixTool-master/lib/dbMod_output.txt -F channels=CA0DDV691 -F title=DB_Output_Log_Host:$serv_host -F token=$slack_bot_key https://slack.com/api/files.upload
 
 }
 
