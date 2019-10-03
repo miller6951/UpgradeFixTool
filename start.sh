@@ -298,7 +298,7 @@ echo " "
 #Make sure in windchill shell
 
 check_wc_shell="$(windchill version)"
-if [[ $check_wc_shell != *"windchill: command not found"* ]]; then
+if [[ $check_wc_shell == *"windchill: command not found"* ]]; then
   echo "ALERT - Please enter windchill shell before running script"
   exit 0
 fi
