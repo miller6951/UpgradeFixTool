@@ -113,25 +113,25 @@ customFiles () {
 }
 
 DBMods () {
-		echo "Input - Enter target DB hostname"
-			read target_db_hostname
-			echo "Input - Enter target DB Schema"
-			read target_db_schema
-			echo "Input - Enter DB password"
-			read target_db_password
-			echo "Input - Enter target DB service name ex Wind"
-			read target_db_service
-			echo "Input - Enter DB Port"
-			read target_db_port
-		#SET GLOBAL VARS
-			export target_db_hostname=$target_db_hostname
-			export target_db_schema=$target_db_schema
-			export target_db_password=$target_db_password
-			export target_db_service=$target_db_service
-			export target_db_port=$target_db_port
+#		echo "Input - Enter target DB hostname"
+#			read target_db_hostname
+#			echo "Input - Enter target DB Schema"
+#			read target_db_schema
+#			echo "Input - Enter DB password"
+#			read target_db_password
+#			echo "Input - Enter target DB service name ex Wind"
+#			read target_db_service
+#			echo "Input - Enter DB Port"
+#			read target_db_port
+	#	#SET GLOBAL VARS
+	#		export target_db_hostname=$target_db_hostname
+	#		export target_db_schema=$target_db_schema
+	#		export target_db_password=$target_db_password
+	#		export target_db_service=$target_db_service
+	#		export target_db_port=$target_db_port
 
 		#Check DB CONNECTION
-			echo "STATUS - Checking Database Connection"
+	#		echo "STATUS - Checking Database Connection"
 		#
 		#	echo "exit" | sqlplus "$target_db_schema/$target_db_password@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(Host=$target_db_hostname)(Port=$target_db_port))(CONNECT_DATA=(SID=$target_db_service)))" | grep Connected > /dev/null
 		#	if [ $? -eq 0 ] 
@@ -175,7 +175,12 @@ shellCommands () {
 		$CustomerLocation${customers[$customer_number]}/${projects[$project_number]}/${tasks[$task_number]}/shell_commands.sh
 }
 
+upgradeManager () {
 
+##EXECUTE PY SCRIPT TO RUN UGM
+
+
+}
 generateSlackKey () {
      slack_bot_key="$(echo "eG94Yi0yNjg0OTg2NzgwLTc3OTg5NTAzNzg0Ny1uZjd3TlBBOXlBNHJMekM1amw0ZnpUWloK" | openssl enc -base64 -d)"
 
@@ -183,6 +188,7 @@ generateSlackKey () {
 #Downloading from repo
 	#echo "STATUS - Downloading Latest customer info"
 	#DownloadCustomerInfo
+
 echo " "
 echo "*********************************************"
 echo " --- Pre-Upgrade Fix Manager --"
@@ -288,13 +294,62 @@ test -f $CustomerLocation${customers[$customer_number]}/${projects[$project_numb
 echo "---------------------------------------------------------------------------------------------------------------------------------------------------"
 
 echo " "
+
+##############################
+# GATHER SYSTEM INFO 
+##############################
 #Get WC Creds
         echo "INPUT - Enter Windchill SiteAdmin Username"
         read WCuser
         echo "INPUT - Enter Windchill SiteAdmin Password"
         read WCpass
+
+if [ "$dbdet" == "true" ]; then
+echo "STATUS - Gathering DB INFO"
+echo "Input - Enter target DB hostname"
+			read target_db_hostname
+			echo "Input - Enter target DB Schema"
+			read target_db_schema
+			echo "Input - Enter DB password"
+			read target_db_password
+			echo "Input - Enter target DB service name ex Wind"
+			read target_db_service
+			echo "Input - Enter DB Port"
+			read target_db_port
+
+			target_db_hostname="ptcupgrade-windchill-dev.cbu7u79hrpin.us-east-1.rds.amazonaws.com"
+			target_db_schema="wc11"
+			target_db_password="OXTlWsNOFPNsvfSvQ7"
+			target_db_service="wind"
+			target_db_port="1521"
+
+				#	#SET GLOBAL VARS
+			export target_db_hostname=$target_db_hostname
+			export target_db_schema=$target_db_schema
+			export target_db_password=$target_db_password
+			export target_db_service=$target_db_service
+			export target_db_port=$target_db_port
+
+		#Check DB CONNECTION
+		#	echo "STATUS - Checking Database Connection"
+		#
+		#	echo "exit" | sqlplus "$target_db_schema/$target_db_password@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(Host=$target_db_hostname)(Port=$target_db_port))(CONNECT_DATA=(SID=$target_db_service)))" | grep Connected > /dev/null
+		#	if [ $? -eq 0 ] 
+		#	then
+		#  	echo "STATUS - Connected Successfully to Database"
+		#	else
+		#  	echo "ALERT - Cannot Connect TO Database please check tnsnames and entered db ifo"
+		#  	exit 0
+		#	fi
+
+fi
+
 echo "INPUT - Press Enter to continue or CTRL+C to exit"
 read pass
+##############################
+# END GATHER INFO
+##############################
+
 
 if [ "$winDudet" == "true" ]; then
 echo "STATUS - EXECUTING WINDU WITH PRESET TASKS FROM REPO"
