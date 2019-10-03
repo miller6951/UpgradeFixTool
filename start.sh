@@ -175,12 +175,7 @@ shellCommands () {
 		$CustomerLocation${customers[$customer_number]}/${projects[$project_number]}/${tasks[$task_number]}/shell_commands.sh
 }
 
-upgradeManager () {
 
-##EXECUTE PY SCRIPT TO RUN UGM
-
-
-}
 generateSlackKey () {
      slack_bot_key="$(echo "eG94Yi0yNjg0OTg2NzgwLTc3OTg5NTAzNzg0Ny1uZjd3TlBBOXlBNHJMekM1amw0ZnpUWloK" | openssl enc -base64 -d)"
 
