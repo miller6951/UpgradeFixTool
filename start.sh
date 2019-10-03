@@ -334,7 +334,10 @@ echo "Input - Enter target DB hostname"
 			then
 		  	echo "STATUS - Connected Successfully to Database"
 			else
+			echo " "
+			echo "############################################################################"
 		  	echo "ALERT - Cannot Connect TO Database please check tnsnames and entered db ifo"
+			echo "############################################################################"
 		  	exit 0
 			fi
 
