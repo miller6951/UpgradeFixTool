@@ -294,11 +294,28 @@ echo " "
 ##############################
 # GATHER SYSTEM INFO 
 ##############################
+
+#Make sure in windchill shell
+
+check_wc_shell="$(windchill version)"
+if [[ $check_wc_shell != *"windchill: command not found"* ]]; then
+  echo "ALERT - Please enter windchill shell before running script"
+  exit 0
+fi
+
 #Get WC Creds
         echo "INPUT - Enter Windchill SiteAdmin Username"
         read WCuser
         echo "INPUT - Enter Windchill SiteAdmin Password"
         read WCpass
+
+#Validate creds
+		echo "Status - Verifying creds"
+		verify_creds="$(curl -u $WCuser:$WCpass localhost/Windchill/app)"
+		if [[ $verify_creds == *"Login Authorization Failed"* ]]; then
+  		echo "ALERT - WCADMIN Creds invalid please enter the correct creds"
+  		exit 0
+		fi
 
 if [ "$dbdet" == "true" ]; then
 echo "STATUS - Gathering DB INFO"
@@ -380,7 +397,4 @@ echo "STATUS - EXECUTING SHELL COMMANDS FROM REPO"
 shellCommands
 fi
 
-echo "##########################################"
-echo "	  Successfull					"
-echo "##########################################"
 
