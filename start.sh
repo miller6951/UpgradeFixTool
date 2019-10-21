@@ -102,6 +102,9 @@ winRu () {
 												cd $winru_log_location
 												zip -r latest_winru.zip $winru_latest_log_folder
 		curl -F file=@$winru_log_location/latest_winru.zip -F channels=CA0DDV691 -F title=WinRu_Log_Host:$serv_host -F token=$slack_bot_key https://slack.com/api/files.upload
+
+		#RUN FINAL WINDU RUN TO VALIDATE FIXES IN PLACE
+		winDu
 }
 
 customFiles () {
@@ -151,8 +154,29 @@ DBMods () {
 	    $script_location/UpgradeFixTool-master/lib/dbMod.sh >> $script_location/UpgradeFixTool-master/lib/dbMod_output.txt
 		curl -F file=@$script_location/UpgradeFixTool-master/lib/dbMod_output.txt -F channels=CA0DDV691 -F title=DB_Output_Log_Host:$serv_host -F token=$slack_bot_key https://slack.com/api/files.upload
 
+
 }
 
+
+#Genterate and post slack report with all generated data
+slackReport ()
+{
+
+if [ "$reportSTAT" == "START" ]; then
+    curl -X POST -H 'Content-type: application/json' --data '{"text":"Taskset started \n Customer Name: ${customers[$customer_number]} Server Name:$serv_host \n Project Name:${projects[$project_number]} \n Taskset Name: ${tasks[$task_number]}"}' $slack_webhook_upgrade_notifications
+fi
+
+if [ "$reportSTAT" == "ERROR" ]; then
+
+fi
+if [ "$reportSTAT" == "FAIL" ]; then
+
+fi
+
+
+
+
+}
 
 DownloadCustomerInfo () {
 
@@ -179,7 +203,8 @@ shellCommands () {
 
 generateSlackKey () {
      slack_bot_key="$(echo "eG94Yi0yNjg0OTg2NzgwLTc3OTg5NTAzNzg0Ny1uZjd3TlBBOXlBNHJMekM1amw0ZnpUWloK" | openssl enc -base64 -d)"
-
+	 slack_webhook_upgrade_notifications="$(echo 'aHR0cHM6Ly9ob29rcy5zbGFjay5jb20vc2VydmljZXMvVDAyTDRWME5ZL0JQRjBQ
+Q0QzSy9McFZwUVlNVWxENTVmTkhTNHh6bXd6bFUK' | openssl enc -d -base64)"
 }
 #Downloading from repo
 	#echo "STATUS - Downloading Latest customer info"
@@ -376,6 +401,7 @@ if [ "$winRudet" == "true" ]; then
 echo "STATUS - EXECUTING WINRU WITH PRESET FIXES FROM REPO"
 winRu
 fi
+
 
 if [ "$sitedet" == "true" ]; then
 echo "STATUS - EXECUTING SITE.xconf UPDATES"
