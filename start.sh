@@ -162,15 +162,16 @@ DBMods () {
 slackReport ()
 {
 
-if [ "$reportSTAT" == "START" ]; then
+if [ "$1" == "START" ]; then
+	echo "Status - Sending slack start notification"
     curl -X POST -H 'Content-type: application/json' --data '{"text":"Taskset started \n Customer Name: ${customers[$customer_number]} Server Name:$serv_host \n Project Name:${projects[$project_number]} \n Taskset Name: ${tasks[$task_number]}"}' $slack_webhook_upgrade_notifications
 fi
 
-if [ "$reportSTAT" == "ERROR" ]; then
-
+if [ "$1" == "ERROR" ]; then
+	echo "Status - Sending slack ERROR notification"
 fi
-if [ "$reportSTAT" == "FAIL" ]; then
-
+if [ "$1" == "FAIL" ]; then
+	echo "Status - Sending slack Fail notification"
 fi
 
 
@@ -390,6 +391,10 @@ read pass
 ##############################
 # END GATHER INFO
 ##############################
+
+
+
+slackReport "$reportSTAT="START""
 
 
 if [ "$winDudet" == "true" ]; then
