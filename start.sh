@@ -393,8 +393,8 @@ read pass
 ##############################
 
 
-
-slackReport "$reportSTAT="START""
+#Sending slack start notification
+ curl -X POST -H 'Content-type: application/json' --data '{"text":"Taskset started \n Customer Name: ${customers[$customer_number]} Server Name:$serv_host \n Project Name:${projects[$project_number]} \n Taskset Name: ${tasks[$task_number]}"}' $slack_webhook_upgrade_notifications
 
 
 if [ "$winDudet" == "true" ]; then
